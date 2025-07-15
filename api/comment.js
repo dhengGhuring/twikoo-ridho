@@ -1,10 +1,11 @@
-const twikoo = require("twikoo/api");
+const twikoo = require("twikoo");
 
 module.exports = async (req, res) => {
+  // CORS config
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://by-dhengghuring.vercel.app"
-  ); // sesuaikan
+    "https://by-dhengghuring.vercel.app/en/"
+  ); // Ganti * dengan domain kamu di production
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -13,9 +14,10 @@ module.exports = async (req, res) => {
     return;
   }
 
-  return twikoo({
-    envId: "twikoo-blog-ridho", // bebas, boleh sesuai project
-    req,
-    res,
+  return twikoo.init({
+    envId: "twikoo-blog-ridho", // Bebas, hanya sebagai label
+    secretId: "", // Kosongkan jika tidak pakai Tencent Cloud
+    secretKey: "",
+    context: { req, res },
   });
 };
